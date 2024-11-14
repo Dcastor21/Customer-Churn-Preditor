@@ -136,9 +136,32 @@ def explain_prediction(probability, input_dict, surname):
 
 
 def generate_email(probability, input_dict, Explanation, surname):
-    pass
+    prompt = f""" You are a manager at HS Bank. You are responsible for ensuring customers stay with the bank and are incentivized with various offers. 
+    
+        You noticed a customer named {surname} has a {round(probability * 100, 1)}% probability of churning.
+        
+        here is the customer's information:
+        {input_dict}
+        
+        
+        Here is some explanation as to why the customer might be at risk of churning :
+        {explanation}
+        
+        
+        generate an email to the customer based on their infomation, asking them to stay if they are at risk of churning, or offering them incentives so that they may  become more loyal to the bank.
+        
+        Make sure to list out a set of incentives to stay based on their information, in bullet point format. Don't ever mention the probability of churning, or the machince learning model tot he customer."""
 
-
+    raw_response = client.chat.completions.create(               
+       model = "lama-3.1-8b-instant",                                           
+       messages = [{
+           "role": "user",
+           "content": prompt
+       }],
+       )
+    
+    print("\n\nEmail Prompt", prompt)
+    return raw_response.choices[0]. message.content
 st.title("Customer Churn Prediction")
 
 
