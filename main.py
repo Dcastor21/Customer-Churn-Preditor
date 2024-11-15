@@ -3,6 +3,7 @@ import pandas as pd
 import pickle
 import numpy as np
 import os
+import infisical
 from dotenv import load_dotenv, dotenv_values 
 from openai import OpenAI 
 
