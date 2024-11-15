@@ -71,6 +71,18 @@ def make_predictions(input_df, input_dict):
         st.write(f"{model} {prob}")
     st.write(f"Average Probability: {avg_probability}")
     
+    col1, col2 =st.columns(2)
+    
+    with col1:
+        fig = ut.create_gauge_chart(avg_probability)
+        st.pyplot(fig, use_container_width = True)
+        st.write(f"The customer has a {avg_probability: .2%} probability of churning.")
+        
+        with col2:
+            fig_probs = ut.create_model_probability_chart(probabilities)
+            st.plotly_chart(fig, use_container_width=True)
+            st.write(f"The customer has a {avg_probability: .2%}probability of churning.")
+    
     return avg_probability
 
 
@@ -258,6 +270,14 @@ st.markdown("---")
 st.subheader("Explanation of Prediction")
 
 st.markdown(explanation)
+
+
+email = generate_email(avg_probability, input_dict, explanation, selected_customer['Surname'])
+
+st.markdown("---")
+st.subheader("Personalized Email")
+
+st.markdown(email)
 
 
 
