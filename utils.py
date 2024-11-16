@@ -40,18 +40,18 @@ def create_gauge_chart(probability):
                     'color': color
                 },
                 'bgcolor':
-                'rgba(0,0,0,0,)',
+                'rgba(0,0,0,0)',
                 'borderwidth': 2,
                 'bordercolor': 'white',
                 'steps': [{
                     'range': [0, 30],
-                    'color': "rgba(0, 255, 0, 0.3)"},
+                    'color': 'rgba(0, 255, 0, 0.3)'},
                     {
                     'range': [30, 60],
-                    'color': "rgba(255, 255, 0, 0.3)"},
+                    'color': 'rgba(255, 255, 0, 0.3)'},
                     {
                     'range': [60, 100],
-                    'color': "rgba(255, 0, 0, 0.3)"},
+                    'color': 'rgba(255, 0, 0, 0.3)'},
                 ],
                 'threshold': {
                     'line': {
@@ -64,23 +64,24 @@ def create_gauge_chart(probability):
             }
         )
     )
-    fig.update_layout(plot_bgcolor="rgba(0,0,0,0)",
+    fig.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                      plot_bgcolor='rgba(0,0,0,0)',
                       font={'color': "white"},
                       width=400,
                       height=300,
-                      margin=dict(l=20, r=20, t=20, b=20))
+                      margin=dict(l=20, r=20, t=50, b=20))
     return fig
 
 
 def create_model_probability_chart(probabilities):
     models = list(probabilites.keys())
-    probs = list(probabilites. values())
+    probs = list(probabilites.values())
 
     fig = go.Figure(data=[
         go.Bar(y=models,
                x=probs,
                orientation='h',
-               text=[f'{p:.2%}'for p in probs],
+               text=[f'{p:.2%}' for p in probs],
                textposition='auto')
     ])
     fig.update_layout(title='Churn probability by Model',

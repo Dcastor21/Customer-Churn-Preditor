@@ -70,24 +70,21 @@ def make_predictions(input_df, input_dict):
 
     avg_probability = np.mean(list(probabilities.values()))
 
-    st.markdown("### Model Probabilites")
-    for model, prob in probabilities.items():
-        st.write(f"{model} {prob}")
-    st.write(f"Average Probability: {avg_probability}")
-
     col1, col2 = st.columns(2)
 
     with col1:
         fig = ut.create_gauge_chart(avg_probability)
         st.pyplot(fig, use_container_width=True)
         st.write(f"The customer has a {
-                 avg_probability: .2%} probability of churning.")
+                 avg_probability:.2%}probability of churning."
+                 )
 
         with col2:
             fig_probs = ut.create_model_probability_chart(probabilities)
             st.plotly_chart(fig, use_container_width=True)
             st.write(f"The customer has a {
-                     avg_probability: .2%}probability of churning.")
+                     avg_probability: .2%}probability of churning."
+                     )
 
     return avg_probability
 
@@ -164,9 +161,9 @@ def generate_email(probability, input_dict, Explanation, surname):
         {explanation}
 
 
-        generate an email to the customer based on their infomation, asking them to stay if they are at risk of churning, or offering them incentives so that they may  become more loyal to the bank.
+        generate an email to the customer based on their information, asking them to stay if they are at risk of churning, or offering them incentives so that they may  become more loyal to the bank.
 
-        Make sure to list out a set of incentives to stay based on their information, in bullet point format. Don't ever mention the probability of churning, or the machince learning model tot he customer."""
+        Make sure to list out a set of incentives to stay based on their information, in bullet point format. Don't ever mention the probability of churning, or the machine learning model tot he customer."""
 
     raw_response = client.chat.completions.create(
         model="lama-3.1-8b-instant",
