@@ -64,9 +64,29 @@ def create_gauge_chart(probability):
             }
         )
     )
-    fig.update_layout(plot_bgcolor = "rgba(0,0,0,0)",
-    font = {'color': "white"},
-    width = 400,
-    height = 300,
-    margin = dict(l=20, r=20, t=20, b=20))
+    fig.update_layout(plot_bgcolor="rgba(0,0,0,0)",
+                      font={'color': "white"},
+                      width=400,
+                      height=300,
+                      margin=dict(l=20, r=20, t=20, b=20))
+    return fig
+
+
+def create_model_probability_chart(probabilities):
+    models = list(probabilites.keys())
+    probs = list(probabilites. values())
+
+    fig = go.Figure(data=[
+        go.Bar(y=models,
+               x=probs,
+               orientation='h',
+               text=[f'{p:.2%}'for p in probs],
+               textposition='auto')
+    ])
+    fig.update_layout(title='Churn probability by Model',
+                      yaxis_title='Models',
+                      xaxis_title='Probability',
+                      xaxis=dict(tickformat='.0%', range=[0, 1]),
+                      height=400,
+                      margin=dict(l=20, r=20, t=40, b=20))
     return fig
