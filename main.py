@@ -75,16 +75,12 @@ def make_predictions(input_df, input_dict):
     with col1:
         fig = ut.create_gauge_chart(avg_probability)
         st.pyplot(fig, use_container_width=True)
-        st.write(f"The customer has a {
-                 avg_probability:.2%}probability of churning."
+        st.write(f"The customer has a {avg_probability:.2%}probability of churning."
                  )
 
         with col2:
             fig_probs = ut.create_model_probability_chart(probabilities)
-            st.plotly_chart(fig, use_container_width=True)
-            st.write(f"The customer has a {
-                     avg_probability: .2%}probability of churning."
-                     )
+            st.plotly_chart(fig_probs, use_container_width=True)
 
     return avg_probability
 

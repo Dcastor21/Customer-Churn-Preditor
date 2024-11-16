@@ -3,11 +3,11 @@ import plotly.graph_objects as go
 
 def create_gauge_chart(probability):
     if probability < 0.3:
-        color = 'green'
+        color = "green"
     elif probability < 0.6:
-        color = 'yellow'
+        color = "yellow"
     else:
-        color = 'red'
+        color = "red"
 
     # Create a gauge chart
     fig = go.Figure(
