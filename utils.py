@@ -1,5 +1,6 @@
 import plotly.graph_objects as go
 
+
 def create_gauge_chart(probability):
     if probability < 0.3:
         color = 'green'
@@ -12,8 +13,8 @@ def create_gauge_chart(probability):
     fig = go.Figure(
         go.Indicator(
             mode="gauge+number",
-            value=probability=100,
-            domain{
+            value=probability * 100,
+            domain={
                 'x': [0, 1],
                 'y': [0, 1]
             },
@@ -51,8 +52,6 @@ def create_gauge_chart(probability):
                     {
                     'range': [60, 100],
                     'color': "rgba(255, 0, 0, 0.3)"},
-
-
                 ],
                 'threshold': {
                     'line': {
@@ -65,11 +64,9 @@ def create_gauge_chart(probability):
             }
         )
     )
-
-    fig.update_layout(paper_bgcolor="rgba(0,0,0,0)",
-                      plot_bgcolor="rgba(0,0,0,0)",
-                      font={'color': "white"},
-                      width=400,
-                      height=300,
-                      margin=dict(l=20, r=20, t=20, b=20))
+    fig.update_layout(plot_bgcolor = "rgba(0,0,0,0)",
+    font = {'color': "white"},
+    width = 400,
+    height = 300,
+    margin = dict(l=20, r=20, t=20, b=20))
     return fig
